@@ -6,29 +6,33 @@ export const emailService = {
     save,
     remove,
     getById,
-    loggedinUser,
     createEmail,
+    filterEmails,
+    getDefaultFilter
 }
 
-const STORAGE_KEY = 'emails'
+const STORAGE_KEY = 'EMAILS'
 
 _createEmails()
 
-async function query(filterBy) {
-    const emails = await storageService.query(STORAGE_KEY)
-    if (filterBy) {
-        var { type, maxBatteryStatus, minBatteryStatus, model } = filterBy
-        maxBatteryStatus = maxBatteryStatus || Infinity
-        minBatteryStatus = minBatteryStatus || 0
-        emails = emails.filter(robot => robot.type.toLowerCase().includes(type.toLowerCase()) && robot.model.toLowerCase().includes(model.toLowerCase())
-            && (robot.batteryStatus < maxBatteryStatus)
-            && robot.batteryStatus > minBatteryStatus)
+async function query(query) {
+    let emails = await storageService.query(STORAGE_KEY)
+    if (query) {
+        let { searchStr, mail, status } = query
+        mail = mail || ''
+        searchStr = searchStr || ''
+        status = status || ''
+        emails = filterEmails(emails, mail, status)
+        emails = emails?.filter(email => email.subject.toLowerCase().includes(searchStr.toLowerCase()))
     }
     return emails
 }
 
-function getById(id) {
-    return storageService.get(STORAGE_KEY, id)
+async function getById(id) {
+    const email = await storageService.get(STORAGE_KEY, id)
+    email.isRead = true
+    save(email)
+    return email
 }
 
 function remove(id) {
@@ -44,31 +48,9 @@ function save(emailToSave) {
     }
 }
 
-function loggedinUser(){
-    return{
-        email: '',
-        fullname: '',
-    }
-}
-function getDefaultFilter() {
-    return {
-        status: '',
-        txt: '', // no need to support complex text search
-        isRead: null, // (optional property, if missing: show all)
-    }
-}
 
-function createEmail(id = '',
-    subject = '',
-    body = '',
-    isRead= false,
-    isStarred= false,
-    sentAt = '',
-    removedAt = null, //for later use
-    from= '',
-    to= '') {
+function createEmail( subject = '', body = '', isRead= false, isStarred= false, sentAt = 0, removedAt = null, from= 'liron.d28@gmail.com',to= '') {
     return {
-        id,
         subject,
         body,
         isRead,
@@ -99,7 +81,7 @@ function _createEmails() {
             body: 'Whatsup',
             isRead: false,
             isStarred: false,
-            sentAt : 1551133930594,
+            sentAt : 1551558630594,
             removedAt : null, //for later use
             from: 'lili@lili.com',
             to: 'user@appsus.com'
@@ -109,7 +91,7 @@ function _createEmails() {
             body: 'Hello',
             isRead: false,
             isStarred: false,
-            sentAt : 1551133930594,
+            sentAt : 9856413930594,
             removedAt : null, //for later use
             from: 'bobo@bobo.com',
             to: 'user2@appsus.com'
@@ -119,7 +101,7 @@ function _createEmails() {
             body: 'Not ready',
             isRead: false,
             isStarred: false,
-            sentAt : 1551133930594,
+            sentAt : 1332233930594,
             removedAt : null, //for later use
             from: 'mimi@mimi.com',
             to: 'user1@appsus.com'
@@ -129,6 +111,38 @@ function _createEmails() {
     }
 }
 
+function getDefaultFilter(route) {
+    route = route?.includes('/') ? route.substring(1) : route
+    return {
+        searchStr: '',
+        mail: route
+    }
+}
 
+function filterEmails(emails, by, status) {
+    let filterByStatus
+    switch (status) {
+        case 'read':
+            filterByStatus = emails.filter(email => email.isRead)
+            break
+        case 'unread':
+            filterByStatus = emails.filter(email => !email.isRead)
+            break
+        default:
+            filterByStatus = emails
+    }
+    switch (by) {
+        case 'inbox':
+            return filterByStatus.filter(email => email.to === loggedinUser.email)
+        case 'sent':
+            return filterByStatus.filter(email => email.from === loggedinUser.email)
+        case 'starred':
+            return filterByStatus.filter(email => email.isStarred)
+        case 'drafts':
+            return filterByStatus.filter(email => !email.sentAt)
+        case 'trash':
+            return filterByStatus.filter(email => email.removedAt)
+    }
+}
 
 

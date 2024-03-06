@@ -151,6 +151,11 @@
     border-bottom: 1px solid lightgray;
 }
 
+.main-font {
+    font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+    font-size: .875rem;
+}
+
 /* Others */
 .blurred {
     filter: blur(4px);
@@ -179,4 +184,10 @@
     margin-top: 24px;
     color: red;
     font-size: 15px;
+}
+
+.icon-hover:hover {
+    background-color: rgba(60, 64, 67, .08);
+    outline: none;
+    border-radius: 50%;
 }

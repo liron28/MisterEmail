@@ -1,0 +1,6 @@
+:root {
+    --bcgd-app: rgb(238, 238, 238);
+    --bcgd-app2: rgba(32, 33, 36, 0.122);
+    --bcgd-main: rgba(255, 255, 255, 0.8);
+    --compose-color: rgba(116, 119, 117, 0.2);
+}

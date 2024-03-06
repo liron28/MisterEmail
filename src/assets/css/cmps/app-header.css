@@ -1,7 +1,6 @@
 .app-header {
-    background: #F6F8FC;
-    color: #545655;
-
+    grid-area: 1 / 1 / 2 / 6;
+    padding: 8px;
 }
 
 .app-header section.container {
@@ -25,4 +24,10 @@
 
 .app-header section.container>section {
     flex-grow: 1;
+}
+
+
+.app-header img {
+    padding: 8px;
+    margin: 2px;
 }

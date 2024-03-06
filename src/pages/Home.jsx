@@ -1,4 +1,4 @@
-import imgUrl from '../assets/imgs/react.png'
+
 
 export function Home() {
     return (

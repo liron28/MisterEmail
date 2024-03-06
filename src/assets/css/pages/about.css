@@ -1,0 +1,22 @@
+.about{
+    text-align: center;
+    align-items: center;
+}
+.about h1{
+    color: dimgray;
+    font-size: 50px;
+}
+.about h2{
+    font-size: 30px;
+}
+.about button{
+    background-color: #F6F8FC;
+    color: black;
+    font-size: 20px;
+    text-align: center;
+    display: inline-block;
+    border: none;
+    border-radius: 8px;
+    margin-top: 20px;
+    padding: 10px;
+}

@@ -1,23 +1,18 @@
-// import { Route, HashRouter as Router, Routes } from 'react-router-dom';
+import { Route, HashRouter as Router, Routes } from 'react-router-dom'
 
-import { Home } from './pages/Home'
-import { AppHeader } from './cmps/AppHeader'
-import { AppFooter } from './cmps/AppFooter'
+import { EmailIndex } from './pages/EmailIndex'
+
 
 export function App() {
 
     return (
-        <>
+        <Router>
             <section className='main-app'>
-                <AppHeader />
-
-                <main className='container'>
-                    <Home />
-                </main>
-
-                <AppFooter />
+                    <Routes>
+                        <Route path="/" element={<EmailIndex />} />
+                    </Routes>
             </section>
-        </>
+        </Router>
 
     )
 }

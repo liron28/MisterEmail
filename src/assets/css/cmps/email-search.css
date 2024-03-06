@@ -1,0 +1,26 @@
+/* .email-search {
+    padding: 8px;
+    flex-grow: 1;
+}
+
+.email-search input {
+    background-color: var(--bcgd-app2);
+    border-color: transparent;
+    border-radius: 24px;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    width: 720px;
+    color: black;
+    background-image: url(../../imgs/search.svg);
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+}
+
+.email-search input:focus {
+    outline-color: transparent;
+    background-color: white;
+}
+
+::placeholder {
+    color: black;
+} */
