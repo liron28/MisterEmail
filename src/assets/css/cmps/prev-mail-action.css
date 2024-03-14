@@ -1,0 +1,8 @@
+.icons-container {
+    width: 150px;
+    justify-content: space-between;
+}
+
+.icons-container .icon img {
+    padding: 5px;
+}

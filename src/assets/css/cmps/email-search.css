@@ -1,6 +1,6 @@
-/* .email-search {
-    padding: 8px;
+.email-search {
     flex-grow: 1;
+    padding: 8px;
 }
 
 .email-search input {
@@ -23,4 +23,4 @@
 
 ::placeholder {
     color: black;
-} */
+}

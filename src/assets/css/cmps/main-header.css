@@ -1,0 +1,25 @@
+.action-bar {
+    display: flex;
+    padding-left: 18px;
+}
+
+.refresh {
+    background-image: url(https://ssl.gstatic.com/ui/v1/icons/mail/gm3/1x/refresh_baseline_nv700_20dp.png);
+    height: 20px;
+    width: 20px;
+}
+
+.select-dropdown {
+    border-radius: 8px;
+    width: 150px;
+    padding: 4px;
+    margin: 4px;
+}
+
+.select-dropdown:focus-visible {
+    outline-color: rgb(118, 118, 118)
+}
+
+.icons-container {
+    width: 100px;
+}

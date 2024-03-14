@@ -1,0 +1,34 @@
+.email-details {
+    min-height: 64ex;
+    padding-right: 16px;
+    padding-left: 16px;
+}
+
+.email-details-header {
+    padding: 20px 0 8px 72px;
+}
+
+.email-details-body {
+    padding-top: 20px;
+    display: flex;
+    width: 100%;
+}
+
+.email-details-body img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.img-container {
+    display: flex;
+    float: none;
+    height: 80px;
+    padding: 0 16px;
+    min-width: 40px;
+}
+
+.mail-info {
+    display: flex;
+    justify-content: space-between;
+}

@@ -11,18 +11,30 @@ export const emailService = {
     getDefaultFilter
 }
 
+const loggedinUser = {
+    email: 'liron.d28@gmail.com',
+    fullname: 'Liron Dahan'
+}
+
+
 const STORAGE_KEY = 'EMAILS'
 
 _createEmails()
 
 async function query(query) {
     let emails = await storageService.query(STORAGE_KEY)
+    // console.log(query);
     if (query) {
         let { searchStr, mail, status } = query
+        // console.log(query);
         mail = mail || ''
+        // console.log(mail);
         searchStr = searchStr || ''
+        // console.log(searchStr);
         status = status || ''
+        // console.log(status);
         emails = filterEmails(emails, mail, status)
+        // console.log(emails);
         emails = emails?.filter(email => email.subject.toLowerCase().includes(searchStr.toLowerCase()))
     }
     return emails
@@ -58,7 +70,7 @@ function createEmail( subject = '', body = '', isRead= false, isStarred= false, 
         sentAt,
         removedAt,
         from,
-        to,
+        to
     }
 }
 
@@ -70,41 +82,41 @@ function _createEmails() {
             subject: 'Miss you!',
             body: 'Would love to catch up sometimes',
             isRead: false,
-            isStarred: false,
+            isStarred: true,
             sentAt : 1551133930594,
-            removedAt : null, //for later use
+            removedAt : null, 
             from: 'momo@momo.com',
-            to: 'user@appsus.com'
+            to: 'liron.d28@gmail.com'
              },
             { id: 'e102',
             subject: 'Text me!',
             body: 'Whatsup',
             isRead: false,
-            isStarred: false,
-            sentAt : 1551558630594,
-            removedAt : null, //for later use
+            isStarred: true,
+            sentAt : 1645762800000,
+            removedAt : null, 
             from: 'lili@lili.com',
-            to: 'user@appsus.com'
+            to: 'liron.d28@gmail.com'
              },
             { id: 'e103',
             subject: 'Hi you!',
             body: 'Hello',
             isRead: false,
-            isStarred: false,
-            sentAt : 9856413930594,
-            removedAt : null, //for later use
+            isStarred: true,
+            sentAt : 1645616400000,
+            removedAt : null, 
             from: 'bobo@bobo.com',
-            to: 'user2@appsus.com'
+            to: 'liron.d28@gmail.com'
              },
             { id: 'e104',
             subject: 'Not now!',
             body: 'Not ready',
             isRead: false,
-            isStarred: false,
-            sentAt : 1332233930594,
-            removedAt : null, //for later use
+            isStarred: true,
+            sentAt : 1645616400000,
+            removedAt : null, 
             from: 'mimi@mimi.com',
-            to: 'user1@appsus.com'
+            to: 'liron.d28@gmail.com'
              }
         ]
         utilService.saveToStorage(STORAGE_KEY, emails)
@@ -121,6 +133,9 @@ function getDefaultFilter(route) {
 
 function filterEmails(emails, by, status) {
     let filterByStatus
+    // console.log(emails);
+    // console.log(by);
+    // console.log(status);
     switch (status) {
         case 'read':
             filterByStatus = emails.filter(email => email.isRead)
@@ -131,6 +146,7 @@ function filterEmails(emails, by, status) {
         default:
             filterByStatus = emails
     }
+    
     switch (by) {
         case 'inbox':
             return filterByStatus.filter(email => email.to === loggedinUser.email)
@@ -143,6 +159,7 @@ function filterEmails(emails, by, status) {
         case 'trash':
             return filterByStatus.filter(email => email.removedAt)
     }
+    console.log(filterByStatus);
 }
 
 

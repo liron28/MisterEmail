@@ -5,7 +5,8 @@ import { emailService } from '../services/email.service'
 
 import { AppHeader } from '../cmps/AppHeader'
 import { AppsGoogleSide } from '../cmps/AppsGoogleSide'
-import { StatusFolder } from '../cmps/StatusFolder'
+import { StatusFolders } from '../cmps/StatusFolders'
+import { Main } from '../cmps/Main'
 
 export function EmailIndex() {
   const location = useLocation()
@@ -35,16 +36,25 @@ export function EmailIndex() {
     try {
         const emails = await emailService.query({ ...filterBy, mail: params.mailStatus })
         setEmails(emails)
+        // console.log(emails);
         setError(null)
     } catch (err) {
         setError(err)
     }
   }
+  function handleIconClicked(type) {
+  }
+
+  if (error) return (<div>
+    <h1>Oops... Somthing went wrong</h1>
+    <p>{error}</p>
+  </div>)
 
   return (
     <div className='email-index'>
       <AppHeader filterBy={filterBy} onSetFilter={onSetFilter} />
-      <StatusFolder onSetFilter={onSetFilter} />
+      <StatusFolders onSetFilter={onSetFilter} />
+      <Main emails={emails} filterByStatus={onSetFilter} handleIconClicked={handleIconClicked} />
       <AppsGoogleSide />
 
     </div>

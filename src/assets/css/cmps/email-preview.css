@@ -1,0 +1,52 @@
+tr {
+    -webkit-box-shadow: inset 0 -1px 0 0 #aaa;
+    border-collapse: collapse;
+    background: #F2F6FC;
+    box-shadow: #E1E7EE 0px -1px 0px 0px inset;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+td {
+    padding: 10px 0px 10px 0px;
+}
+
+td input,
+td img {
+    opacity: 0.32;
+}
+
+tr:hover * {
+    opacity: 1;
+    cursor: pointer;
+}
+
+tr td:first-child {
+    padding-left: 18px;
+    width: 50px;
+}
+
+tr td:last-child {
+    width: 145px;
+}
+
+.display-none {
+    display: none;
+}
+
+.display-block {
+    display: block;
+}
+
+.text-preview {
+    width: 400px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.selected {
+    background-color: rgb(194, 219, 255);
+}
